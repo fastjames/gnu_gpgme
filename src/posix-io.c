@@ -500,6 +500,8 @@ _gpgme_io_waitpid (int pid, int hang, int *r_status, int *r_signal)
     ret = waitpid (pid, &status, hang? 0 : WNOHANG);
   while (ret == (pid_t)(-1) && errno == EINTR);
 
+  TRACE_LOG  ("_gpgme_io_waitpid: ret=%i pid=%i", ret, pid);
+
   if (ret == pid)
     {
       if (WIFSIGNALED (status))
